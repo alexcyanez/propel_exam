@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  propel-etl:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: propel-etl-pipeline
+    volumes:
+      # Mount input data directory
+      - ./data:/data
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: /data/input/data propel.xlsx /data/output
+    restart: "no"
